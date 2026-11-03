@@ -222,17 +222,70 @@ Escribe una función que detecte los outliers de un vector $x$ para cada uno de 
 
 ```{r , include = FALSE}
 # Regla 3 sigma
-
+reglasigma<-function(x){
+  media<-mean(x)
+  desv<-sd(x)
+  res<-{}
+  for(xi in x){
+    if(!is.na(xi)){
+      val<-xi-media
+      if(val > 3*desv){
+        res<-append(res, xi)
+      }
+    }
+  }
+  return(res)
+}
 
 # Identificador Hampel
-
+reglahampel<-function(x){
+  media<-mean(x)
+  mediana<-mad(x)
+  res<-{}
+  for(xi in x){
+    if(!is.na(xi)){
+      val<-xi-media
+      if(val > 3*mediana){
+        res<-append(res, xi)
+      }
+    }
+  }
+  return(res)
+}
 
 
 # Regla boxplot
-
+reglaboxplot<-function(x){
+  cuartiles<-quantile(x)
+  x_s<-cuartiles[4]
+  x_i<-cuartiles[2]
+  IQR<-x_s-x_i
+  res<-{}
+  for(xi in x){
+    if(!is.na(xi)){
+      if(xi > x_s+1.5 * IQR | xi < x_i-1.5 * IQR){
+        res<-append(res, xi)
+      }
+    }
+  }
+  return(res)
+}
 
 # Percentiles
-
+reglapercentil<-function(x){
+  cuartiles<-quantile(x, probs=seq(0.05, 0.95, 0.90))
+  percentil5<-quantile[1]
+  percentil95<-quantile[2]
+  res<-{}
+  for(xi in x){
+    if(!is.na(xi)){
+      if(xi > percentil95 | xi < percentil5){
+        res<-append(res, xi)
+      }
+    }
+  }
+  return(res)
+}
 ```
 
 
@@ -242,8 +295,6 @@ Utiliza la función `mutate` y `across` para identificar los outliers en la vari
 Nota: podría extenderse la aplicación a todas las variables numéricas usando también `mutate`, `across` y `where`. 
 
 ```{r Solucion ejercicio 6, include=TRUE, echo=TRUE, eval=TRUE, results=TRUE}
-
-
 
 ```
 
