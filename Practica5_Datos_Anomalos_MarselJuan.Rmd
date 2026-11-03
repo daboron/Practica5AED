@@ -156,6 +156,54 @@ Hazlo para el data frame con observaciones completas `clean_iris` (que no tiene 
   * Compara los resultados para los dos conjuntos en la variable `Petal.Length`.
 
 ```{r , include = TRUE}
+clean_iris %>% summarise(
+  mediaSepal.Length=mean(Sepal.Length),
+  mediaSepal.Width=mean(Sepal.Width),
+  mediaPetal.Length=mean(Petal.Length),
+  mediaPetal.Width=mean(Petal.Width),
+  desvSepal.Length=sd(Sepal.Length),
+  desvSepal.Width=sd(Sepal.Width),
+  desvPetal.Length=sd(Petal.Length),
+  desvPetal.Width=sd(Petal.Width),
+  medianaSepal.Length=median(Sepal.Length),
+  medianaSepal.Width=median(Sepal.Width),
+  medianaPetal.Length=median(Petal.Length),
+  medianaPetal.Width=median(Petal.Width),
+  MADMSepal.Length=mad(Sepal.Length),
+  MADMSepal.Width=mad(Sepal.Width),
+  MADMPetal.Length=mad(Petal.Length),
+  MADMPetal.Width=mad(Petal.Width),
+  IQRSepal.Length=IQR(Sepal.Length),
+  IQRSepal.Width=IQR(Sepal.Width),
+  IQRPetal.Length=IQR(Petal.Length),
+  IQRPetal.Width=IQR(Petal.Width)
+)
+
+dirty_iris %>% summarise(
+  mediaSepal.Length=mean(Sepal.Length, na.rm=TRUE),
+  mediaSepal.Width=mean(Sepal.Width, na.rm=TRUE),
+  mediaPetal.Length=mean(Petal.Length, na.rm=TRUE),
+  mediaPetal.Width=mean(Petal.Width, na.rm=TRUE),
+  desvSepal.Length=sd(Sepal.Length, na.rm=TRUE),
+  desvSepal.Width=sd(Sepal.Width, na.rm=TRUE),
+  desvPetal.Length=sd(Petal.Length, na.rm=TRUE),
+  desvPetal.Width=sd(Petal.Width, na.rm=TRUE),
+  medianaSepal.Length=median(Sepal.Length, na.rm=TRUE),
+  medianaSepal.Width=median(Sepal.Width, na.rm=TRUE),
+  medianaPetal.Length=median(Petal.Length, na.rm=TRUE),
+  medianaPetal.Width=median(Petal.Width, na.rm=TRUE),
+  MADMSepal.Length=mad(Sepal.Length, na.rm=TRUE),
+  MADMSepal.Width=mad(Sepal.Width, na.rm=TRUE),
+  MADMPetal.Length=mad(Petal.Length, na.rm=TRUE),
+  MADMPetal.Width=mad(Petal.Width, na.rm=TRUE),
+  IQRSepal.Length=IQR(Sepal.Length, na.rm=TRUE),
+  IQRSepal.Width=IQR(Sepal.Width, na.rm=TRUE),
+  IQRPetal.Length=IQR(Petal.Length, na.rm=TRUE),
+  IQRPetal.Width=IQR(Petal.Width, na.rm=TRUE)
+)
+
+#Todos los resultados para Petal.Length son mayores en dirty_iris. Por lo que al eliminar valores se pierden
+#bastantes datos con valores altos
 
 ```
 
