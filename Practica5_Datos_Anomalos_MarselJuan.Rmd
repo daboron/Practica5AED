@@ -121,6 +121,10 @@ Nota: Puedes reemplazar los valores para cada variable del dataframe usando `mut
 ```{r Solucion ejercicio 2, include=TRUE, echo=TRUE, eval=TRUE, results=TRUE}
 # DEBEMOS ELIMINAR TAMBIEN LOS VALROES IGUALES A CERO YA QUE SE TRATA DE LONGITUDES DE PARTES DE UNA FLOR. NO PUEDEN SER O
 
+dirty_iris$Sepal.Length[which(!is.finite(dirty_iris$Sepal.Length))]<-'NA'
+dirty_iris$Sepal.Width[which(!is.finite(dirty_iris$Sepal.Width))]<-'NA'
+dirty_iris$Petal.Length[which(!is.finite(dirty_iris$Petal.Length))]<-'NA'
+dirty_iris$Petal.Width[which(!is.finite(dirty_iris$Petal.Width))]<-'NA'
 
 ```
 
