@@ -122,10 +122,16 @@ Nota: Puedes reemplazar los valores para cada variable del dataframe usando `mut
 # DEBEMOS ELIMINAR TAMBIEN LOS VALROES IGUALES A CERO YA QUE SE TRATA DE LONGITUDES DE PARTES DE UNA FLOR. NO PUEDEN SER O
 
 dirty_iris$Sepal.Length[which(!is.finite(dirty_iris$Sepal.Length))]<-'NA'
-dirty_iris$Sepal.Width[which(!is.finite(dirty_iris$Sepal.Width))]<-'NA'
-dirty_iris$Petal.Length[which(!is.finite(dirty_iris$Petal.Length))]<-'NA'
-dirty_iris$Petal.Width[which(!is.finite(dirty_iris$Petal.Width))]<-'NA'
+dirty_iris$Sepal.Length[which(dirty_iris$Sepal.Length < 1)]<-'NA'
 
+dirty_iris$Sepal.Width[which(!is.finite(dirty_iris$Sepal.Width))]<-'NA'
+dirty_iris$Sepal.Width[which(dirty_iris$Sepal.Width < 1)]<-'NA'
+
+dirty_iris$Petal.Length[which(!is.finite(dirty_iris$Petal.Length))]<-'NA'
+dirty_iris$Petal.Length[which(dirty_iris$Petal.Length < 1)]<-'NA'
+
+dirty_iris$Petal.Width[which(!is.finite(dirty_iris$Petal.Width))]<-'NA'
+dirty_iris$Petal.Width[which(dirty_iris$Petal.Width < 1)]<-'NA'
 ```
 
 
