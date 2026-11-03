@@ -274,8 +274,8 @@ reglaboxplot<-function(x){
 # Percentiles
 reglapercentil<-function(x){
   cuartiles<-quantile(x, probs=seq(0.05, 0.95, 0.90))
-  percentil5<-quantile[1]
-  percentil95<-quantile[2]
+  percentil5<-cuartiles[1]
+  percentil95<-cuartiles[2]
   res<-{}
   for(xi in x){
     if(!is.na(xi)){
@@ -295,6 +295,20 @@ Utiliza la función `mutate` y `across` para identificar los outliers en la vari
 Nota: podría extenderse la aplicación a todas las variables numéricas usando también `mutate`, `across` y `where`. 
 
 ```{r Solucion ejercicio 6, include=TRUE, echo=TRUE, eval=TRUE, results=TRUE}
+
+clean_iris<- clean_iris %>%
+  mutate(
+    across(
+      .cols = Petal.Length,
+      .fns = list(
+        sigma     = ~ .x %in% reglasigma(.x),
+        hampel    = ~ .x %in% reglahampel(.x),
+        boxplot   = ~ .x %in% reglaboxplot(.x),
+        percentil = ~ .x %in% reglapercentil(.x)
+      ),
+      .names = "outlier_{.fn}"
+    )
+  )
 
 ```
 
